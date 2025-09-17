@@ -13,6 +13,7 @@ import Services from './Component/Services/Services.jsx'
 import Login from './Authentication/Login/Login.jsx'
 import Register from './Authentication/Register/Register.jsx'
 import Authprovider from './Authentication/AuthProvider/Authprovider.jsx'
+import CheckOut from './Component/CheckOut/CheckOut.jsx'
 
 
 
@@ -40,6 +41,15 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>
+      },
+      {
+        path: '/checkout/:id',
+        element: <CheckOut></CheckOut>,
+        // loader: async ({ params }) => {
+        //   const res = await fetch(`http://localhost:5000/services/${params.id}`);
+        //   const data = await res.json(); // JSON convert korte hobe
+        //   return data;
+        // }
       }
     ]
   },
