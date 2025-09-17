@@ -9,6 +9,8 @@ export default function Navbar() {
         <Link to='/'><li><a>Home</a></li></Link>
         <Link to='/about'><li><a>About</a></li></Link>
         <Link to='/services'><li><a>Services</a></li></Link>
+        <Link to='/login'><li><a>Login</a></li></Link>
+        <Link to='/register'><li><a>Register</a></li></Link>
     </>
     return (
         <div>
