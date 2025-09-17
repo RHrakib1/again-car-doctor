@@ -1,5 +1,6 @@
 import React from 'react'
 import login from '../../assets/images/login/login.svg'
+import { Link } from 'react-router-dom'
 
 export default function Register() {
     const formHandleRegister = e => {
@@ -74,8 +75,8 @@ export default function Register() {
                             </div>
 
                             <p className="text-xs text-center sm:px-6 text-gray-600">
-                                Don't have an account?{" "}
-                                <a rel="noopener noreferrer" href="#" className="underline text-violet-600">Sign up</a>
+                                You have an account? please{" "}
+                                <Link to='/login'><a rel="noopener noreferrer" href="#" className="underline text-violet-600">Sign In</a></Link>
                             </p>
                         </div>
 
