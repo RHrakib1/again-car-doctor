@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import login from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../AuthProvider/Authprovider'
+import Swal from 'sweetalert2'
 
 export default function Login() {
+    const { usersignin } = useContext(AuthContext)
     const formHandleLogin = e => {
         e.preventDefault()
         const shortData = e.target
@@ -10,6 +13,24 @@ export default function Login() {
         const password = shortData.password.value
         const objdata = { email, password }
         console.log(objdata)
+
+        usersignin(email, password)
+            .then(result => {
+                console.log(result.user)
+                Swal.fire({
+                    title: "You have successfully login!",
+                    icon: "success",
+                    draggable: true
+                });
+            })
+            .catch(error => {
+                console.log(error)
+                Swal.fire({
+                    title: "Please enter you correct email/password",
+                    icon: "error",
+                    draggable: true
+                });
+            })
 
     }
     return (
