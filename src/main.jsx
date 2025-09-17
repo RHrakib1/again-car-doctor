@@ -12,6 +12,7 @@ import About from './Component/About/About.jsx'
 import Services from './Component/Services/Services.jsx'
 import Login from './Authentication/Login/Login.jsx'
 import Register from './Authentication/Register/Register.jsx'
+import Authprovider from './Authentication/AuthProvider/Authprovider.jsx'
 
 
 
@@ -51,7 +52,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <div className='max-w-[1200px] mx-auto'>
     <StrictMode>
-      <RouterProvider router={router} />
+      <Authprovider>
+        <RouterProvider router={router} />
+      </Authprovider>
     </StrictMode>,
   </div>
 )
