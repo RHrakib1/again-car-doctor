@@ -2,6 +2,14 @@ import React from 'react'
 import login from '../../assets/images/login/login.svg'
 
 export default function Register() {
+    const formHandleRegister = e => {
+        e.preventDefault()
+        const shortData = e.target
+        const email = shortData.email.value
+        const password = shortData.password.value
+        const objdata = { email, password }
+        console.log(objdata)
+    }
     return (
         <div>
             <div>
@@ -12,14 +20,14 @@ export default function Register() {
                         </div>
                         <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-white text-gray-800 shadow">
                             <h1 className="text-2xl font-bold text-center">Sign UP</h1>
-                            <form noValidate="" action="" className="space-y-6">
+                            <form onSubmit={formHandleRegister} noValidate="" action="" className="space-y-6">
                                 <div className="space-y-1 text-sm">
-                                    <label htmlFor="username" className="block text-gray-600">Username</label>
+                                    <label htmlFor="username" className="block text-gray-600">Email</label>
                                     <input
-                                        type="text"
-                                        name="username"
+                                        type="email"
+                                        name="email"
                                         id="username"
-                                        placeholder="Username"
+                                        placeholder="Email"
                                         className="w-full px-4 py-3 rounded-md border border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600 focus:outline-none"
                                     />
                                 </div>
@@ -33,7 +41,7 @@ export default function Register() {
                                         className="w-full px-4 py-3 rounded-md border border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600 focus:outline-none"
                                     />
                                 </div>
-                                <button className="block w-full p-3 text-center rounded-sm text-white bg-violet-600 hover:bg-violet-700 transition">
+                                <button className="block w-full p-3 text-center rounded-sm text-white bg-[#FF3811] hover:bg-[#e0330f] transition">
                                     Sign UP
                                 </button>
                             </form>

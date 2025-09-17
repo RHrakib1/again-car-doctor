@@ -23,7 +23,7 @@ export default function ImgText() {
                         <p className="py-6">
                             There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. <br />the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
                         </p>
-                        <button className="btn btn-primary">Get More Info</button>
+                        <button className="btn bg-[#FF3811] hover:bg-[#e0330f] text-white">Get More Info</button>
                     </div>
                 </div>
             </div>
