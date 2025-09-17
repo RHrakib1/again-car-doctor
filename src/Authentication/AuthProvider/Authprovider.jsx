@@ -1,5 +1,5 @@
-import React, { createContext, useState } from 'react'
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import React, { createContext, useEffect, useState } from 'react'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import auth from '../Provider/firebase.config';
 
 
@@ -14,11 +14,24 @@ export default function Authprovider({ children }) {
     }
 
     const usercreate = (email, password) => {
+        setloadding(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
     const usersignin = (email, password) => {
+        setloadding(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
+
+    useEffect(() => {
+        const unsubscrib = onAuthStateChanged(auth, currentUser => {
+            setuserdata(currentUser)
+            setloadding(false)
+            console.log(currentUser, 'this is a currentuser')
+        });
+        return () => {
+            return unsubscrib();
+        }
+    }, [])
 
     const info = {
         userdata,
