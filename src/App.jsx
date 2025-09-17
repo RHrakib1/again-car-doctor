@@ -1,9 +1,10 @@
 import React from 'react'
+import Banner from './Component/Banner/Banner'
 function App() {
 
   return (
     <>
-      <p className='text-2 text-5xl font-bold text-red-400'>hello developer</p>
+      <Banner></Banner>
     </>
   )
 }
