@@ -8,6 +8,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './Layout/Home/Home.jsx'
+import About from './Component/About/About.jsx'
+import Services from './Component/Services/Services.jsx'
 
 
 
@@ -19,7 +21,15 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <App></App>
-      }
+      },
+      {
+        path: '/about',
+        element: <About></About>
+      },
+      {
+        path: '/services',
+        element: <Services></Services>
+      },
     ]
   },
 ]);
@@ -29,7 +39,9 @@ const router = createBrowserRouter([
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+  <div className='max-w-[1200px] mx-auto'>
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  </div>
 )

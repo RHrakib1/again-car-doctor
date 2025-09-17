@@ -1,7 +1,15 @@
 import React from 'react'
 import logo from '../../assets/logo.svg'
+import { Link } from 'react-router-dom'
+import { CiSearch } from "react-icons/ci";
+import { SlHandbag } from "react-icons/sl";
 
 export default function Navbar() {
+    const Links = <>
+        <Link to='/'><li><a>Home</a></li></Link>
+        <Link to='/about'><li><a>About</a></li></Link>
+        <Link to='/services'><li><a>Services</a></li></Link>
+    </>
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">
@@ -13,18 +21,22 @@ export default function Navbar() {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><a>Item 1</a></li>
+                            {Links}
                         </ul>
                     </div>
                     <img className='w-[107px]' src={logo} alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Item 1</a></li>
+                        {Links}
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <div className='flex items-center gap-4'>
+                        <SlHandbag className='text-xl'></SlHandbag>
+                        <CiSearch className='text-2xl'></CiSearch>
+                        <button className="btn btn-outline btn-error px-6 text-[18px] py-2">Appointment</button>
+                    </div>
                 </div>
             </div>
         </div>
