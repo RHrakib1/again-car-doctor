@@ -45,11 +45,7 @@ const router = createBrowserRouter([
       {
         path: '/checkout/:id',
         element: <CheckOut></CheckOut>,
-        // loader: async ({ params }) => {
-        //   const res = await fetch(`http://localhost:5000/services/${params.id}`);
-        //   const data = await res.json(); // JSON convert korte hobe
-        //   return data;
-        // }
+        loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
       }
     ]
   },
