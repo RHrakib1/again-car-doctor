@@ -1,17 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from '../../assets/logo.svg'
 import { Link } from 'react-router-dom'
 import { CiSearch } from "react-icons/ci";
 import { SlHandbag } from "react-icons/sl";
+import { AuthContext } from '../../Authentication/AuthProvider/Authprovider';
 
 export default function Navbar() {
+    const { userdata, logout } = useContext(AuthContext)
+
+    const signoutuser = () => {
+        logout()
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
     const Links = <>
         <Link to='/'><li><a>Home</a></li></Link>
         <Link to='/about'><li><a>About</a></li></Link>
         <Link to='/services'><li><a>Services</a></li></Link>
-        <Link to='/login'><li><a>Login</a></li></Link>
-        <Link to='/register'><li><a>Register</a></li></Link>
+        {
+            userdata?.email ? <li><button onClick={signoutuser}>Logout</button></li> : <Link to='/login'><li><a>Login</a></li></Link>
+        }
     </>
+
+
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">

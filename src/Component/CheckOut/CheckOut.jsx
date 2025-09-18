@@ -1,14 +1,60 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useLoaderData, } from 'react-router-dom'
+import { AuthContext } from '../../Authentication/AuthProvider/Authprovider'
+import Swal from 'sweetalert2'
 
 export default function CheckOut() {
 
     const loaddata = useLoaderData()
+
+    const { userdata } = useContext(AuthContext)
+
+
+    const handlecheckout = e => {
+        e.preventDefault()
+        const shortdata = e.target
+        const name = shortdata.name.value
+        const date = shortdata.date.value
+        const email = userdata?.email
+        const price = loaddata.price
+        const address = shortdata.address.value
+        const order = {
+            CoustomerName: name,
+            date,
+            email,
+            address,
+            Price: price,
+            service_id: loaddata._id,
+            service: loaddata.title,
+            service_img: loaddata.img
+        }
+        console.log(order)
+
+        fetch(`http://localhost:5000/booking/`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Successfully Added to the services",
+                        text: "Thanks for service",
+                    });
+                }
+                console.log(data)
+            })
+
+    }
     return (
         <div>
-            <h1>Booking Value:{loaddata.service_id}</h1>
-            <h1 className='text-3xl'>Name of the service: {loaddata.title}</h1>
-            <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-50 dark:text-gray-800">
+            {/* <h1>Booking Value:{loaddata.service_id}</h1>
+            <h1 className='text-3xl'>Name of the service: {loaddata.title}</h1> */}
+            <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-50 dark:text-gray-800 mt-2">
                 <h2 className="text-xl font-semibold">Your cart</h2>
                 <ul className="flex flex-col divide-y dark:divide-gray-300">
                     <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
@@ -36,30 +82,35 @@ export default function CheckOut() {
                     <p className="text-sm dark:text-gray-600">Not including taxes and shipping costs</p>
                 </div>
             </div>
-            <div className="flex flex-col  p-6 rounded-md md:p-20 sm:p-10 dark:bg-gray-50 dark:text-gray-800 mt-20  mb-20">
-                <form noValidate="" action="" className="space-y-12">
+            <div className="flex flex-col  p-6 rounded-md  sm:p-10 dark:bg-gray-50 dark:text-gray-800 mt-20  mb-20">
+                <h1 className='text-4xl font-bold text-center mb-10'>Booking Now</h1>
+                <form onSubmit={handlecheckout} noValidate="" action="" className="space-y-12">
                     <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
                         <div>
-                            {/* <label htmlFor="email" className="block mb-2 text-sm">Email address</label> */}
-                            <input type="text" name="firstName" id="firstName" placeholder="First Name" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
+                            <label htmlFor="name" className="block mb-2 text-sm">Name</label>
+                            <input type="text" name="name" id="name" defaultValue={userdata?.displayName} className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
                         </div>
                         <div>
-                            {/* <label htmlFor="password" className="text-sm">Password</label> */}
-                            <input type="text" name="lastName" id="lastName" placeholder="Last Name" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
+                            <label htmlFor="date" className="text-sm">Date</label>
+                            <input type="date" name="date" id="date" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
                         </div>
                         <div>
-                            {/* <label htmlFor="password" className="text-sm">Password</label> */}
-                            <input type="tel" name="yourPhone" id="yourPhone" placeholder="Your Phone" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
+                            <label htmlFor="price" className="text-sm">Price</label>
+                            <input type="text" name="price" id="price" defaultValue={`$${loaddata.price}`} className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
                         </div>
                         <div>
 
-                            {/* <label htmlFor="email" className="block mb-2 text-sm">Email address</label> */}
-                            <input type="email" name="email" id="email" placeholder="Your Email" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
+                            <label htmlFor="email" className="block mb-2 text-sm">Email address</label>
+                            <input type="email" name="email" id="email" defaultValue={userdata?.email} className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
+                        </div>
+                        <div>
+                            <label htmlFor="email" className="block mb-2 text-sm">Address</label>
+                            <textarea name="address" id="" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"></textarea>
                         </div>
                     </div>
                     <div className="space-y-2">
                         <div>
-                            <button type="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-600 dark:text-gray-50">Order Confirm</button>
+                            <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-[#FF3811] dark:text-gray-50">Order Confirm</button>
                         </div>
                     </div>
                 </form>
