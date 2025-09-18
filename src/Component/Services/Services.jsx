@@ -5,7 +5,7 @@ export default function Services() {
     const [user, setuser] = useState([])
 
     useEffect(() => {
-        fetch('services.json')
+        fetch('http://localhost:5000/services')
             .then(res => res.json())
             .then(data => setuser(data))
     }, [])
@@ -17,8 +17,8 @@ export default function Services() {
                 <p>the majority have suffered alteration in some form, by injected humour,<br /> or randomised words which don't look even slightly believable. </p>
                 <div className='grid grid-cols-3 gap-4 mt-20 mb-30'>
                     {
-                    user.map(data => <Subservices data={data}></Subservices>)
-                }
+                        user.map(data => <Subservices data={data}></Subservices>)
+                    }
                 </div>
             </div>
         </div>
