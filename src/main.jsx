@@ -14,6 +14,7 @@ import Login from './Authentication/Login/Login.jsx'
 import Register from './Authentication/Register/Register.jsx'
 import Authprovider from './Authentication/AuthProvider/Authprovider.jsx'
 import CheckOut from './Component/CheckOut/CheckOut.jsx'
+import Booking from './Component/CheckOut/Booking.jsx'
 
 
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
         path: '/checkout/:id',
         element: <CheckOut></CheckOut>,
         loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+      },
+      {
+        path: '/booking',
+        element: <Booking></Booking>
       }
     ]
   },

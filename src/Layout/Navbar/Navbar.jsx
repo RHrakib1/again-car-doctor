@@ -22,7 +22,10 @@ export default function Navbar() {
         <Link to='/about'><li><a>About</a></li></Link>
         <Link to='/services'><li><a>Services</a></li></Link>
         {
-            userdata?.email ? <li><button onClick={signoutuser}>Logout</button></li> : <Link to='/login'><li><a>Login</a></li></Link>
+            userdata?.email ? <>
+                <Link to='/booking'><li><a>My Booking</a></li></Link>
+                <li><button onClick={signoutuser}>Logout</button></li>
+            </> : <Link to='/login'><li><a>Login</a></li></Link>
         }
     </>
 
