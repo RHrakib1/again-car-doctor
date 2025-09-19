@@ -50,11 +50,9 @@ export default function CheckOut() {
                         confirmButtonText: "added"
                     }).then((result) => {
                         if (result.isConfirmed) {
-
                             navigate('/booking')
                         }
                     });
-
                 }
                 console.log(data)
 
@@ -65,8 +63,6 @@ export default function CheckOut() {
     }
     return (
         <div>
-            {/* <h1>Booking Value:{loaddata.service_id}</h1>
-            <h1 className='text-3xl'>Name of the service: {loaddata.title}</h1> */}
             <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-50 dark:text-gray-800 mt-2">
                 <h2 className="text-xl font-semibold">Your cart</h2>
                 <ul className="flex flex-col divide-y dark:divide-gray-300">

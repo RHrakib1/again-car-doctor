@@ -16,6 +16,7 @@ import Authprovider from './Authentication/AuthProvider/Authprovider.jsx'
 import CheckOut from './Component/CheckOut/CheckOut.jsx'
 import Booking from './Component/CheckOut/Booking.jsx'
 import PrivateRoute from './Layout/Private/PrivateRoute.jsx'
+import UpdateBooking from './Component/CheckOut/UpdateBooking.jsx'
 
 
 
@@ -52,6 +53,12 @@ const router = createBrowserRouter([
       {
         path: '/booking',
         element: <PrivateRoute><Booking></Booking></PrivateRoute>
+      },
+      {
+        path: '/updatebooking/:id',
+        element: <UpdateBooking></UpdateBooking>,
+        loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`)
+
       }
     ]
   },
