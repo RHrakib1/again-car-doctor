@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useLoaderData, } from 'react-router-dom'
+import { useLoaderData, useNavigate, } from 'react-router-dom'
 import { AuthContext } from '../../Authentication/AuthProvider/Authprovider'
 import Swal from 'sweetalert2'
 
@@ -8,6 +8,7 @@ export default function CheckOut() {
     const loaddata = useLoaderData()
 
     const { userdata } = useContext(AuthContext)
+    const navigate = useNavigate();
 
 
     const handlecheckout = e => {
@@ -41,13 +42,25 @@ export default function CheckOut() {
             .then(data => {
                 if (data.acknowledged) {
                     Swal.fire({
+                        title: "add cart",
+                        text: "You added to cart",
                         icon: "success",
-                        title: "Successfully Added to the services",
-                        text: "Thanks for service",
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "added"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            navigate('/booking')
+                        }
                     });
+
                 }
                 console.log(data)
+
             })
+
+
 
     }
     return (

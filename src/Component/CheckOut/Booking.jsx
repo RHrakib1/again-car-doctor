@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../Authentication/AuthProvider/Authprovider'
+import { MdDeleteOutline } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+
+
 
 export default function Booking() {
 
@@ -14,6 +18,28 @@ export default function Booking() {
                 .then(data => setbookings(data))
         }
     }, [userdata])
+
+
+    const handleDelete = id => {
+        console.log(id, 'this item is deletet')
+
+        fetch(`http://localhost:5000/booking/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                console.log(data)
+
+                if (data.deletedCount > 0) {
+                    alert('deltet data')
+                    const remaining = bookings.filter(data => data._id !== id)
+                    setbookings(remaining)
+                }
+            })
+    }
+
+
 
     return (
         <div>
@@ -37,7 +63,7 @@ export default function Booking() {
                             <tr key={index}>
                                 <th>
                                     <label>
-                                        <input type="checkbox" className="checkbox" />
+                                        <button className='btn'><FaEdit className='text-4xl'></FaEdit></button>
                                     </label>
                                 </th>
                                 <td>
@@ -59,7 +85,7 @@ export default function Booking() {
                                 <td>{data.address}</td>
                                 <td>{data.Price}</td>
                                 <td>
-                                    <button className="btn btn-ghost btn-xs">X</button>
+                                    <button onClick={() => handleDelete(data._id)} className="btn "><MdDeleteOutline className='text-4xl'></MdDeleteOutline></button>
                                 </td>
                             </tr>
                         ))}
