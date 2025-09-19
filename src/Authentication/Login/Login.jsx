@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
 import login from '../../assets/images/login/login.svg'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../AuthProvider/Authprovider'
 import Swal from 'sweetalert2'
 
 export default function Login() {
     const { usersignin } = useContext(AuthContext)
+    const location = useLocation()
+    console.log(location)
+    const navigate = useNavigate()
     const formHandleLogin = e => {
         e.preventDefault()
         const shortData = e.target
@@ -16,6 +19,7 @@ export default function Login() {
 
         usersignin(email, password)
             .then(result => {
+                navigate(location?.state ? location?.state : '/')
                 console.log(result.user)
                 Swal.fire({
                     title: "You have successfully login!",
